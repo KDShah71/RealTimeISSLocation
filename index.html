@@ -87,21 +87,23 @@
       //     }
       //   ).addTo(mymap);
 
-      const api_url = "https://api.wheretheiss.at/v1/satellites/25544";
+      //   const api_url = "https://api.wheretheiss.at/v1/satellites/25544";
+
+      const api_url = "http://api.open-notify.org/iss-now.json";
       const getCoordinates = async () => {
         const response = await fetch(api_url);
 
         const data = await response.json();
-        console.log(data);
 
-        const { latitude, longitude } = data;
+        const { latitude, longitude } = data.iss_position;
 
         marker.setLatLng([latitude, longitude]);
 
-        document.getElementById("lat").innerHTML = latitude;
-        document.getElementById("long").innerHTML = longitude;
+        document.getElementById("lat").innerHTML = latitude + "°";
+        document.getElementById("long").innerHTML = longitude + "°";
       };
       getCoordinates();
+      setInterval(getCoordinates, 1000);
     </script>
   </body>
 </html>
