@@ -65,6 +65,14 @@
       const tiles = L.tileLayer(tileUrl, { attribution });
       tiles.addTo(mymap);
 
+      var ISSIcon = L.icon({
+        iconUrl: "iss.png",
+        iconSize: [80, 40],
+        iconAnchor: [40, 20],
+      });
+
+      const marker = L.marker([0, 0], { icon: ISSIcon }).addTo(mymap);
+
       // WITH MAPBOX
       //   L.tileLayer(
       //     "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}",
@@ -87,6 +95,8 @@
         console.log(data);
 
         const { latitude, longitude } = data;
+
+        marker.setLatLng([latitude, longitude]);
 
         document.getElementById("lat").innerHTML = latitude;
         document.getElementById("long").innerHTML = longitude;
